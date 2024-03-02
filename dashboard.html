@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LiveCool - Dashboard</title>
+</head>
+<body>
+    <h1>Welcome to LiveCool, [username]!</h1>
+    <p>This is your dashboard.</p>
+    <ul>
+        <li><a href="create-video.html">Create a Video</a></li>
+        <li><a href="manage-videos.html">Manage Your Videos</a></li>
+        <li><a href="explore.html">Explore Videos</a></li>
+        <li><a href="logout.html">Logout</a></li>
+    </ul>
+    
+    <h2>Your Videos</h2>
+    <ul id="user-videos">
+        </ul>
+    
+    <script>
+        // This script retrieves user video data and populates the list
+        // You'll need to implement server-side communication (e.g., AJAX) to fetch data
+        fetch('/api/user/videos')
+            .then(response => response.json())
+            .then(data => {
+                const videoList = document.getElementById('user-videos');
+                data.forEach(video => {
+                    const listItem = document.createElement('li');
+                    listItem.innerHTML = `<a href="watch-video.html?id=${video.id}">${video.title}</a>`;
+                    videoList.appendChild(listItem);
+                });
+            });
+    </script>
+</body>
+</html>
